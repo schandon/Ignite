@@ -5,15 +5,15 @@ export function Comment(){
         <div className={styles.comment}>
         <img src="https://github.com/schandon.png" alt="" />
         
-        <div className={styles.comentBox}>
-            <div className={styles.comentContent}>
+        <div className={styles.commentBox}>
+            <div className={styles.commentContent}>
                 <header>
                         <div className={styles.authorAndTime}>
                             <strong>Alexandre Souza</strong>
                             <time title="17 de Julho ás  02:07" dataTime='2022-07-17 02:07:45'>Cerca de 1h atrás</time>
                         </div>
                         <button title='Deletar comentário'>
-                            <Trash size={20}/>
+                            <Trash size={24}/>
                         </button>
                     </header>
                     
@@ -21,8 +21,10 @@ export function Comment(){
             </div>
 
             <footer>
+                <button>
                     <ThumbsUp />
                     Aplaudir <span>20</span>
+                </button>
             </footer>   
         </div>
         </div>
