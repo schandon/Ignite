@@ -6,6 +6,18 @@ import styles from './App.module.css'
 import './global.css'
 
 
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl:"https://github.com/schandon.png" ,
+      name:"Alexandre Pereira" ,
+      role: "Web Developer",
+    },
+    publishedbAt: Date,
+    contente: String
+  }
+ ]
 function App() {
   return (
     <div>
