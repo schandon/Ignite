@@ -1,22 +1,30 @@
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
 import { Comment } from './Commet';
+import { Avatar } from './Avatar';
+
 import styles from './Post.module.css'
 
-export function Post() {
+export function Post({author, publishedAt}) {
+    const publishedDateFormatted = format(publishedAt, "dd 'de' LLLL 'ás'  HH:mm'h'", {locale: ptBR,})
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img
-                        className={styles.avatar}
-                        src="https://github.com/schandon.png"
-                    />
+                    <Avatar src={ author.avatarUrl}/>
                     <div className={styles.authorInfo}>
-                        <strong>Alexandre Souza</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
 
                     </div>                    
                 </div>
-                <time title="17 de Julho ás  02:07" dataTime='2022-07-17 02:07:45'>Publicado há 1h</time>
+                <time
+                    title="17 de Julho ás  02:07"
+                    dataTime='2022-07-17 02:07:45'
+                >
+                publishedDateFormatted
+                </time>
             </header>
             <div className={styles.content}>
                 <p>Coe mané, ai é pika</p>
