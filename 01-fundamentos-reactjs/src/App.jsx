@@ -14,7 +14,7 @@ const posts = [
       name: "Alexandre Pereira",
       role: "Web Developer",
     },
-    contente: [
+    content: [
       { type: 'paragraph', content: "Fala galeraa 😁", },
       { type: 'paragraph', content: "Acabei de iniciar meu projeto do Ignite 🧪", },
 
@@ -29,7 +29,7 @@ const posts = [
       name: "Diego Fernandes",
       role: "CTO @Rocketseat",
     },
-    contente: [
+    content  : [
       { type: 'paragraph', content: "Fala galeraa 😁", },
       { type: 'paragraph', content: "Eu sou um dos professores do projeto do Ignite 🧪", },
       { type: 'paragraph', content: "Qualquer coisa me chama", },
