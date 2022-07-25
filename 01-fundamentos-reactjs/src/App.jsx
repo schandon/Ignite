@@ -20,7 +20,7 @@ const posts = [
 
       { type: 'link', content: "#novoprojeto", },
     ],
-    publishedbAt: new Date('2022-07-21 05:17:00'),
+    publishedAt: new Date(),
   },
   {
     id: 2,
@@ -32,10 +32,10 @@ const posts = [
     content  : [
       { type: 'paragraph', content: "Fala galeraa 😁", },
       { type: 'paragraph', content: "Eu sou um dos professores do projeto do Ignite 🧪", },
-      { type: 'paragraph', content: "Qualquer coisa me chama", },
+      { type: 'paragraph', content: "Qualquer coisa me chama" },
       
     ],
-      publishedbAt: new Date('2022-07-21 05:17:00'),
+      publishedAt: new Date(),
   },
 ];
 function App() {
@@ -50,9 +50,9 @@ function App() {
               <Post
                 author={post.author}
                 content={post.content}
-                publishedbAt={post.publishedbAt}
+                publishedbAt={post.publishedAt}
               />
-            )
+            );
           })}
         </main>
       </div>

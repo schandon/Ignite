@@ -1,34 +1,42 @@
 import { format, formatDistanceToNow } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+import  ptBR from 'date-fns/locale/pt-BR';
 
 import { Comment } from './Commet';
 import { Avatar } from './Avatar';
 
 import styles from './Post.module.css'
+import { useState } from 'react';
 
 export function Post({ author, publishedAt, content }) {
-    const publishedDateFormatted = format(publishedAt, "dd 'de' LLLL 'ás'  HH:mm'h'", {locale: ptBR,})
-    const publisheDateRelativeNow = formatDistanceToNow(publishedAt,
-        {
-            locale: ptBR,
-            addSuffix: true,
-        })
-    
+    const [comments, setComments] = useState([1, 2]);    
+    console.log(author)
+    console.log(publishedAt)
+    console.log(content)
+    // const publishedDateFormatted = format('publishedAt', "d 'de' LLLL 'ás'  HH:mm'h'",)
+    // const publisheDateRelativeNow = formatDistanceToNow(publishedAt,
+    //     {
+    //         locale: ptBR,
+    //         addSuffix: true,
+    //     })
+		
+    function handleCreateNemComment() {
+        event.preventDefault();
+        setComments([...comments, comments.length + 1])
+    }
+
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img src={ author.avatarUrl}/>
+                    <Avatar src={ author.avatarUrl}/>
                     <div className={styles.authorInfo}>
                         <strong>{author.name}</strong>
                         <span>{author.role}</span>
 
                     </div>                    
                 </div>
-                <time title={publishedDateFormatted} dataTime={publishedAt.toISOString()}>
-                
-                    {publisheDateRelativeNow}
-                
+                <time title={publishedAt} dataTime={publishedAt}>
+                    sorry
                 </time>
             </header>
             <div className={styles.content}>
@@ -40,8 +48,7 @@ export function Post({ author, publishedAt, content }) {
                     }
                 })}
             </div>
-
-            <form className={styles.commentForm}>
+            <form onSubmit={handleCreateNemComment}className={styles.commentForm}>
                 <strong>Deixe seu Feedback</strong>
                 <textarea
                     placeholder='Deixe seu Comentário'
@@ -52,9 +59,11 @@ export function Post({ author, publishedAt, content }) {
             </form>
 
             <div className={styles.commentList}>
-                <Comment />
-                <Comment />
-                <Comment />
+                {comments.map(comment => {
+                    return (
+                        <Comment/>
+                    )
+                })}
             </div>
         </article>
     );
