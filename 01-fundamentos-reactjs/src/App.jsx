@@ -20,7 +20,7 @@ const posts = [
 
       { type: 'link', content: "#novoprojeto", },
     ],
-    publishedAt: new Date(),
+    publishedAt: new Date(2017,10,25),
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const posts = [
       { type: 'paragraph', content: "Qualquer coisa me chama" },
       
     ],
-      publishedAt: new Date(),
+      publishedAt: new Date(2017,10,25),
   },
 ];
 function App() {
