@@ -1,14 +1,21 @@
 import styles from './Commet.module.css'
 import { Trash, ThumbsUp } from 'phosphor-react'
+import { useState } from 'react';
 
-export function Comment({ content, onDeleteComment}) {
+export function Comment({ content, onDeleteComment }) {
+    
+    const [likeCount, setLikeCount] = useState(0);
     
     function handleDeleteComment() {
         console.log("Deletar");
         onDeleteComment(content);
     }
 
-
+    function handleLikeCount(){
+        setLikeCount((state) => {
+            return state + 1;
+        });
+    }
     return (
         <div className={styles.comment}>
         <img src="https://github.com/schandon.png" alt="" />
@@ -29,9 +36,9 @@ export function Comment({ content, onDeleteComment}) {
             </div>
 
             <footer>
-                <button>
+                <button onClick={handleLikeCount}>
                     <ThumbsUp />
-                    Aplaudir <span>20</span>
+                    Aplaudir <span>{likeCount}</span>
                 </button>
             </footer>   
         </div>
