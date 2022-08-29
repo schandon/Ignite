@@ -26,12 +26,17 @@ export function Post({ author, publishedAt, content }: PostProps) {
     console.log(author)
     console.log(publishedAt)
     console.log(content)
-    const publishedDateFormatted = format('publishedAt', "d 'de' LLLL 'ás'  HH:mm'h'",)
-    const publisheDateRelativeNow = formatDistanceToNow(publishedAt,
-        {
-            locale: ptBR,
-            addSuffix: true,
-        })
+    const publishedDateFormatted = new Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: 'long',
+        hour: '2-digit',
+        minute: '2-digit'
+    }).format(publishedAt);
+    // const publisheDateRelativeNow = formatDistanceToNow(publishedAt,
+    //     {
+    //         locale: ptBR,
+    //         addSuffix: true,
+    //     });
 	
     const [newCommentText, setNewCommentText] = useState('');
 
@@ -73,8 +78,8 @@ export function Post({ author, publishedAt, content }: PostProps) {
 
                     </div>                    
                 </div>
-                <time title={'2022-06-05 08:50:43'} dataTime={'2022-06-05 08:50:43'}>
-                    sorry
+                <time title={'11 de agosto de 2022'} dateTime={'2022-06-05 08:50:43'}>
+                    {publishedDateFormatted}
                 </time>
             </header>
             <div className={styles.content}>
@@ -95,7 +100,6 @@ export function Post({ author, publishedAt, content }: PostProps) {
                     value={newCommentText}
                     onInvalid= { handleNewCommentInvalid}
                     onChange={handleNewCommentChange}
-                    disabled={handleNewCommentInvalid}
                     required
                 />
 

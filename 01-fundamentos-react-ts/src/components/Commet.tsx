@@ -2,7 +2,12 @@ import styles from './Commet.module.css'
 import { Trash, ThumbsUp } from 'phosphor-react'
 import { useState } from 'react';
 
-export function Comment({ content, onDeleteComment }) {
+interface CommentsProps {
+    content: string;
+    onDeleteComment: (comment: string) => void;
+}
+
+export function Comment({ content, onDeleteComment }:CommentsProps) {
     
     const [likeCount, setLikeCount] = useState(0);
     
@@ -25,7 +30,7 @@ export function Comment({ content, onDeleteComment }) {
                 <header>
                         <div className={styles.authorAndTime}>
                             <strong>Alexandre Souza</strong>
-                            <time title="17 de Julho ás  02:07" dataTime='2022-07-17 02:07:45'>Cerca de 1h atrás</time>
+                            <time title="17 de Julho ás  02:07" dateTime='2022-07-17 02:07:45'>Cerca de 1h atrás</time>
                         </div>
                         <button onClick={ handleDeleteComment } title='Deletar comentário'>
                             <Trash size={24}/>
