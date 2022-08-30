@@ -5,7 +5,7 @@ import { Sidebar } from './components/Sidebar'
 import styles from './App.module.css'
 import './global.css'
 
-
+export function App() {
 const posts = [
   {
     id: 1,
@@ -20,7 +20,7 @@ const posts = [
 
       { type: 'link', content: "#novoprojeto", },
     ],
-    publishedAt: new Date(2017,10,25),
+    publishedAt: new Date('2022-06-13 15:00:00'),
   },
   {
     id: 2,
@@ -35,10 +35,10 @@ const posts = [
       { type: 'paragraph', content: "Qualquer coisa me chama" },
       
     ],
-      publishedAt: new Date(2017,10,25),
+    publishedAt: new Date('2022-06-13 15:00:00'),
   },
 ];
-function App() {
+
   return (
     <div>
       <Hearder/>
@@ -48,6 +48,7 @@ function App() {
           {posts.map(post => {
             return (
               <Post
+                key={post.id}
                 author={post.author}
                 content={post.content}
                 publishedbAt={post.publishedAt}
