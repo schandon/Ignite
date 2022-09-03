@@ -4,7 +4,7 @@ import  ptBR from 'date-fns/locale/pt-BR';
 import { Comment } from './Commet';
 import { Avatar } from './Avatar';
 
-import styles from './Post.module.css'
+import styles from './Post.module.css';
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 
 interface Author{

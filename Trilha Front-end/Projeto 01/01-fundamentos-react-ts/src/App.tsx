@@ -51,7 +51,7 @@ const posts = [
                 key={post.id}
                 author={post.author}
                 content={post.content}
-                publishedbAt={post.publishedAt}
+                publishedAt={post.publishedAt}
               />
             );
           })}
