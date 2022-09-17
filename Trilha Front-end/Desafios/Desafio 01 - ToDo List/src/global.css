@@ -15,6 +15,8 @@
   --blueDark: #1E6F9F;
 
   --red: #E25858;
+
+  background: var(--gray-400);
 }
 :focus {
   outline: transparent;
@@ -25,12 +27,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 
 }
 
 body{
-  background: var(454545);
-  color: var(--gray-300);
+  background: var(#454545);
   -webkit-font-smoothing: antialiased;
 }
 

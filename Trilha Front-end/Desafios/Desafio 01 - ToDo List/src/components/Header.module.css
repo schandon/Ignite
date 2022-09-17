@@ -1,37 +1,16 @@
+
 .header {
     background: var(--gray-700);
+    padding: 4rem 0;
+    min-width: 90rem;
+    min-height: 12.5rem;
     display: flex;
     justify-content: center;
-    padding: 4rem 0;
-    width: 90rem;
-    height: 12.5rem;
 
 }
 
-.header img{
+.header img {
     width: 7.875rem;
     height: 3rem;
-
-}
-
-.button footer a{
-    background: var(--blueDark);
-    color: var(--gray-100);
-    border: 1px solid var(--blueDark);
-    border-radius: 8px;
-    height: 40px;
-    padding: 0 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 0.5rem;
-    transition: color 0.1s, background-color 0.1s;
-}
-.button footer a:hover{
-    background: var(--gray-100);
-    color: var(--white);
+    
 }

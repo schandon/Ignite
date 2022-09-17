@@ -1,24 +1,30 @@
 import logoToDoList from '../assets/Logo.png'
-import styles from './Header.module.css';
+import stylesHeader from './Header.module.css';
+import stylesForm from './Form.module.css';
 import { PlusCircle } from "phosphor-react"
 
 export default function Header(){
     return (
-        <div className={styles.header}>
+        <>
+            <div className={stylesHeader.header}>
             <header>
-                <img src={logoToDoList} />
+                <h1>
+                    <img src={logoToDoList} />
+                </h1>
             </header>
-            <div className={styles.button}>
-                {/* <input>
-                
-                </input> */}
-                <footer>
-                    <a href='#'>
-                        Criar
-                        <PlusCircle size={20} />
-                    </a>
-                </footer>
             </div>
-        </div>
+            <div className={stylesForm.entrada}>
+                <form>
+                    <input placeholder='Adicione uma tarefa nova' />
+                    <footer>
+                        <a href='#'>
+                            Criar
+                            <PlusCircle size={20} />
+                        </a>
+                    </footer>
+                </form>
+            </div>
+        </>
+        
     );
 }
