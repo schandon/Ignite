@@ -31,7 +31,7 @@
 }
 
 .entrada footer a:hover{
-    background: var(--gray-100);
+    background: var(--blue);
     color: var(--white);
    
 }

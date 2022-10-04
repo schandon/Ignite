@@ -16,7 +16,7 @@
 
   --red: #E25858;
 
-  background: var(--gray-400);
+  background: var(--gray-600);
 }
 :focus {
   outline: transparent;
