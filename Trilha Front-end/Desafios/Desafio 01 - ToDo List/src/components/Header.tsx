@@ -1,9 +1,20 @@
+import { ChangeEvent, useState } from 'react';
 import logoToDoList from '../assets/Logo.png'
 import stylesHeader from './Header.module.css';
 import stylesForm from './Form.module.css';
 import { PlusCircle } from "phosphor-react"
 
 export default function Header(){
+    const [task, setTask] = useState(['']);
+    const [newTask, setNewTask] = useState('');
+    
+    function handleNewTask(event:ChangeEvent<HTMLInputElement>) {
+        event.preventDefault();
+
+        setTask([...task, newTask]);
+        setNewTask(event.target.value)
+    }
+    
     return (
         <>
             <div className={stylesHeader.header}>
@@ -15,7 +26,12 @@ export default function Header(){
             </div>
             <div className={stylesForm.entrada}>
                 <form>
-                    <input placeholder='Adicione uma tarefa nova' />
+                    <input
+                        name='input'
+                        placeholder='Adicione uma tarefa nova'
+                        onChange={handleNewTask}
+                        value={newTask}
+                    />
                     <footer>
                         <a href='#'>
                             Criar
