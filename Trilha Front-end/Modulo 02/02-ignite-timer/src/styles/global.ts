@@ -17,6 +17,7 @@ export const GobalStyle = createGlobalStyle`
     body{
         background: ${(props) => props.theme['gray-900']};
         color: ${(props) => props.theme['gray-300']};
+        -webkit-font-smoothing: antialiased;
     }
 
     border-style, input, textarea, button{
