@@ -1,25 +1,61 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form'
 import { Play } from "phosphor-react";
-import { CountDownContainer, HomeContainer, FormContainer,Separator,StartCountDownButton, TaskInput, MinutesAmountInput } from './styles';
+
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import {
+    CountDownContainer,
+    HomeContainer,
+    FormContainer,
+    Separator,
+    StartCountDownButton,
+    TaskInput,
+    MinutesAmountInput
+} from './styles';
+
+
+const newCycleFormValidationSchema = zod.object({
+    task: zod.string().min(1, "Informe a tarefa"),
+    minutesAmount: zod
+        .number()
+        .min(5, "O ciclo precisa ser de no mínimo de 5 minutos")
+        .max(60, "O ciclo precisa ser de no máximo de 60 minutos"),
+})
+
+type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
-    const [task, setTask] = useState('');
-    function handleSubmit(event) {
-        console.log(event.target.task.value)
-        return (event.target.task.value)
+    const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
+        resolver: zodResolver(newCycleFormValidationSchema),
+        defaultValues: {
+            task: '',
+            minutesAmount: 0,
+
+        }
+    });
+
+    const task = watch('task');
+    const isSubmitDisable = !task;
+    
+    function handleCreateNewCycle(data: any) {
+        console.log(data)
+        reset();
+
     }
+
+
     return (
         <HomeContainer>
-            <form onSubmit={handleSubmit} action="">
+            <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
                 <FormContainer>
                     <label htmlFor="task">Vou trabalhar em</label>
                     <TaskInput
                         id="task"
-                        name='task'
                         list="task-suggestion"
                         placeholder="Dê um nome para seu projeto"
-                        onChange={(e)=>setTask(e.target.value)}
-                        // value={task}
+                        {...register('task')}
                     />
                     
                     <datalist id='task-suggestion'>
@@ -34,11 +70,9 @@ export function Home() {
                     <label htmlFor="minutesAmount"></label>
                     <MinutesAmountInput
                         type="number"
-                        id='minutesAmount'
                         placeholder="00"
                         step={5}
-                        min={5}
-                        max={60}
+                        {...register('minutesAmount',{valueAsNumber: true})}
                     />
 
                     <span>minutos.</span>
@@ -52,7 +86,7 @@ export function Home() {
                     <span>0</span>
                 </CountDownContainer>
 
-                <StartCountDownButton disabled={!task} type='submit'>
+                <StartCountDownButton disabled={isSubmitDisable} type='submit'>
                     <Play size={24} />
                     Começar
                 </StartCountDownButton>
