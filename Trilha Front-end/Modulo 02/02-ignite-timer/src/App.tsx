@@ -6,8 +6,9 @@ import { GobalStyle } from './styles/global'
 import { DefaultTheme } from './styles/themes/default'
 
 
+
 export function App() {
-  return (
+      return (
     <ThemeProvider theme={DefaultTheme}>
       <BrowserRouter>
         <Router />
