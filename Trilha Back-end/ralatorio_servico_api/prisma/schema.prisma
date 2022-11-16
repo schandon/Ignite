@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model service_report {
+  id               String   @id @unique @default(uuid())
+  text             String
+  data_service     DateTime
+  category_service String
+}
+
+model service_order {
+  os                String   @id @unique
+  reported_problems String
+  finished          Boolean
+  date_os           DateTime
+}
+
+model port {
+  id        String @id @default(uuid())
+  name      String
+  latitude  String
+  longitude String
+  cidade    String
+  uf        String
+}
+
+model ship {
+  id            String  @id @default(uuid())
+  name          String
+  owner         String
+  mmsi          String
+  imo           String
+  port_register String
+  indicate_call String?
+}
+
+model equipaments {
+  id               String   @id @default(uuid())
+  name             String
+  date_manufacture DateTime
+  quantity         Int
+  serial_number    Int
+}
+
+model collaborators {
+  matricula String @id
+  nome      String
+}
+
+model role {
+  id          String @id @default(uuid())
+  description String
+}
+
+model time_sheet {
+  id                    String   @id @default(uuid())
+  date                  DateTime
+  quantity_collaborator Int
+  date_start            DateTime
+  date_ends             DateTime
+}
