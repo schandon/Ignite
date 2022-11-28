@@ -11,10 +11,15 @@ datasource db {
 }
 
 model service_report {
-  id               String   @id @unique @default(uuid())
-  text             String
-  data_service     DateTime
-  category_service String
+  id                               String                             @id @unique @default(uuid())
+  text                             String
+  data_service                     DateTime
+  category_service                 String
+  created_at                       DateTime                           @default(now())
+  service_report_collaborator_role service_report_collaborator_role[]
+  service_report_equipaments       service_report_equipaments[]
+  materials_test                   materials_test[]
+  materials_usage                  materials_usage[]
 }
 
 model service_order {
@@ -22,6 +27,7 @@ model service_order {
   reported_problems String
   finished          Boolean
   date_os           DateTime
+  created_at        DateTime @default(now())
 }
 
 model port {
@@ -34,37 +40,86 @@ model port {
 }
 
 model ship {
-  id            String  @id @default(uuid())
-  name          String
-  owner         String
   mmsi          String
   imo           String
+  name          String
+  owner         String
   port_register String
   indicate_call String?
+
+  @@id([mmsi, imo])
 }
 
 model equipaments {
-  id               String   @id @default(uuid())
-  name             String
-  date_manufacture DateTime
-  quantity         Int
-  serial_number    Int
+  id                         String                       @id @default(uuid())
+  name                       String
+  date_manufacture           DateTime
+  quantity                   Int
+  serial_number              String
+  service_report_equipaments service_report_equipaments[]
 }
 
 model collaborators {
-  matricula String @id
-  nome      String
+  matricula                   String                             @id
+  nome                        String
+  service_report_collaborator service_report_collaborator_role[]
 }
 
 model role {
-  id          String @id @default(uuid())
-  description String
+  id                  String                             @id @default(uuid())
+  description         String
+  service_report_role service_report_collaborator_role[]
 }
 
 model time_sheet {
-  id                    String   @id @default(uuid())
+  id                    String   @default(uuid())
   date                  DateTime
   quantity_collaborator Int
-  date_start            DateTime
-  date_ends             DateTime
+  date_start            DateTime @default(now())
+  date_ends             DateTime @default(now())
+
+  @@id([id, date])
+}
+
+model materials_usage {
+  id                String         @id @default(uuid())
+  serial_number     String
+  description       String?
+  quantity          Int
+  value             Float
+  total             Float
+  fk_service_report String
+  service_report    service_report @relation(fields: [fk_service_report], references: [id])
+}
+
+model materials_test {
+  id                String @default(uuid())
+  model             String
+  type              String
+  serial_number     String
+  fk_service_report String
+
+  service_report service_report @relation(fields: [fk_service_report], references: [id])
+
+  @@id([id, model, type, serial_number])
+}
+
+model service_report_collaborator_role {
+  id                String         @id @default(uuid())
+  service_report    service_report @relation(fields: [fk_service_report], references: [id])
+  collaborators     collaborators  @relation(fields: [fk_collaborators], references: [matricula])
+  role              role           @relation(fields: [fk_role], references: [id])
+  fk_service_report String
+  fk_collaborators  String
+  fk_role           String
+  created_at        DateTime       @default(now())
+}
+
+model service_report_equipaments {
+  id                String         @id @default(uuid())
+  service_report    service_report @relation(fields: [fk_service_report], references: [id])
+  equipaments       equipaments    @relation(fields: [fk_equipaments], references: [id])
+  fk_service_report String
+  fk_equipaments    String
+  created_at        DateTime       @default(now())
 }
