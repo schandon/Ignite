@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres:13.5
+    restart: always
+    container_name: relatorio_japao
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: relatorio_japao
+    ports:
+      - "5432:5432"

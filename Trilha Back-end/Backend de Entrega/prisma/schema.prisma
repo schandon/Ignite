@@ -7,25 +7,87 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Deliveryman {
-  id         String       @id @default(uuid())
-  username   String       @unique
-  password   String
-  Deliveries Deliveries[]
+model colaborador {
+  id                    String                 @id @default(uuid())
+  email                 String                 @unique
+  user_domain           String                 @unique
+  full_name             String                 @unique
+  acess_server          String
+  perm_acess_internet   Boolean
+  perm_install_software Boolean
+  trainee               Boolean?               @default(false)
+  office                String
+  date_hire             String?
+  date_resignation      String?
+  created_at            DateTime               @default(now())
+  colaborador_software  colaborador_software[]
+  colaborador_celular   colaborador_celular[]
+  colaborador_maquina   colaborador_maquina[]
 }
 
-model Clients {
-  id         String       @id @default(uuid())
-  username   String       @unique
-  password   String
-  Deliveries Deliveries[]
+model maquina {
+  id                  String                @id @default(uuid())
+  name                String                @unique
+  model               String
+  service_tag         String                @unique
+  so                  String
+  memory              Int
+  hd                  Int?
+  ssd                 Int?
+  ip                  String
+  mac_address         String
+  manager             String
+  cod_jdb             String
+  created_at          DateTime              @default(now())
+  ends_at             String?
+  date_sale           DateTime?
+  colaborador_maquina colaborador_maquina[]
 }
 
-model Deliveries {
+model software {
+  id                   String                 @id @default(uuid())
+  description          String
+  product_key          String?
+  qtd_purchase         Int
+  qtd_used             Int
+  created_at           DateTime               @default(now())
+  colaborador_software colaborador_software[]
+}
+
+model celular {
+  id                  String                @id @default(uuid())
+  model               String
+  no_                 String                @unique
+  so                  String
+  adm_aproved         Boolean               @default(false)
+  created_at          DateTime              @default(now())
+  ends_at             String?
+  colaborador_celular colaborador_celular[]
+}
+
+model colaborador_software {
   id             String      @id @default(uuid())
-  item_name      String
-  clients        Clients     @relation(fields: [fk_clients], references: [id])
-  fk_clients     String
-  deliveryman    Deliveryman @relation(fields: [fk_deliveryman], references: [id])
-  fk_deliveryman String
+  id_colaborador String
+  colaborador    colaborador @relation(fields: [id_colaborador], references: [id])
+  id_software    String
+  software       software    @relation(fields: [id_software], references: [id])
+  created_at     DateTime    @default(now())
+}
+
+model colaborador_celular {
+  id             String      @id @default(uuid())
+  id_colaborador String
+  colaborador    colaborador @relation(fields: [id_colaborador], references: [id])
+  id_celular     String
+  celular        celular     @relation(fields: [id_celular], references: [id])
+  created_at     DateTime    @default(now())
+}
+
+model colaborador_maquina {
+  id             String      @id @default(uuid())
+  id_colaborador String
+  colaborador    colaborador @relation(fields: [id_colaborador], references: [id])
+  id_maquina     String
+  maquina        maquina     @relation(fields: [id_maquina], references: [id])
+  created_at     DateTime    @default(now())
 }
