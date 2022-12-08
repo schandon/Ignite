@@ -10,7 +10,7 @@ interface ICreateCelular {
 
 
 export class CreateCelularUseCase{
-    async execute({id,model, no_, so, adm_aproved}:ICreateCelular) {
+    async execute({ id, model, no_, so }:ICreateCelular) {
     const celularExist = await prisma.celular.findFirst({
         where: {
             no_:{

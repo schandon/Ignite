@@ -20,7 +20,3 @@ export class CreateCelularController {
   
   }
 }
-
-function uuid(): string {
-  throw new Error("Function not implemented.");
-}
