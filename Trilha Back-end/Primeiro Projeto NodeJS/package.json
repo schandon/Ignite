@@ -1,0 +1,19 @@
+{
+  "name": "PrimeiroProjetoNodeJS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "uuid": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "resolutions": {
+    "package-a": "2.0.0",
+    "package-b": "5.0.0",
+    "package-c": "1.5.2"
+  }
+}
