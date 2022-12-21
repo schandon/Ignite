@@ -11,15 +11,16 @@ datasource db {
 }
 
 model service_report {
-  id                               String                             @id @unique @default(uuid())
-  text                             String
-  data_service                     DateTime
-  category_service                 String
-  created_at                       DateTime                           @default(now())
+  id               String   @id @unique @default(uuid())
+  text             String
+  data_service     DateTime
+  category_service String
+  created_at       DateTime @default(now())
+
   service_report_collaborator_role service_report_collaborator_role[]
   service_report_equipaments       service_report_equipaments[]
-  materials_test                   materials_test[]
-  materials_usage                  materials_usage[]
+  test_equipaments                 test_equipaments[]
+  usage_equipaments                usage_equipaments[]
 }
 
 model service_order {
@@ -42,10 +43,10 @@ model port {
 model ship {
   mmsi          String
   imo           String
-  name          String
+  name_vessel   String
   owner         String
-  port_register String
-  indicate_call String?
+  port_registry String
+  call_sign     String?
 
   @@id([mmsi, imo])
 }
@@ -60,28 +61,33 @@ model equipaments {
 }
 
 model collaborators {
-  matricula                   String                             @id
-  nome                        String
-  service_report_collaborator service_report_collaborator_role[]
+  matricula String @id
+  nome      String
+
+  service_report_collaborator_role service_report_collaborator_role[]
 }
 
 model role {
-  id                  String                             @id @default(uuid())
-  description         String
-  service_report_role service_report_collaborator_role[]
+  id          String @id @default(uuid())
+  description String
+
+  service_report_collaborator_role service_report_collaborator_role[]
 }
 
 model time_sheet {
-  id                    String   @default(uuid())
-  date                  DateTime
-  quantity_collaborator Int
-  date_start            DateTime @default(now())
-  date_ends             DateTime @default(now())
+  id          String   @default(uuid())
+  date        DateTime
+  men         Int
+  date_start  DateTime @default(now())
+  leave_shop  DateTime @default(now())
+  arrive_job  DateTime
+  leave_job   DateTime
+  arrive_shop DateTime
 
   @@id([id, date])
 }
 
-model materials_usage {
+model usage_equipaments {
   id                String         @id @default(uuid())
   serial_number     String
   description       String?
@@ -92,7 +98,7 @@ model materials_usage {
   service_report    service_report @relation(fields: [fk_service_report], references: [id])
 }
 
-model materials_test {
+model test_equipaments {
   id                String @default(uuid())
   model             String
   type              String

@@ -6,26 +6,26 @@ const prisma = new PrismaClient();
 async function main() {
 const result =  await prisma.ship.createMany({
   data: [{
-    name:  'Gabiru do Mar',
+    name_vessel:  'Gabiru do Mar',
     owner: 'Gabiru ',
     mmsi: '1029',
     imo: '1222',
-    port_register: 'Rio dos Gabirus',
-    indicate_call: 'Tenho um problemas'
+    port_registry: 'Rio dos Gabirus',
+    call_sign: 'Tenho um problemas'
 },{
-  name:  'Gabiru do Alado',
+  name_vessel:  'Gabiru do Alado',
   owner: 'Francis Armelau',
   mmsi: '1010',
   imo: '1215',
-  port_register: 'Gabiru das Ostras',
-  indicate_call: 'Tengo a probleminhas'
+  port_registry: 'Gabiru das Ostras',
+  call_sign: 'Tengo a probleminhas'
 },{
-  name:  'Gabiruzinho Estranho',
+  name_vessel:  'Gabiruzinho Estranho',
   owner: 'Genésio da Silva',
   mmsi: '9909',
   imo: '6777',
-  port_register: 'Rio das Filtsao',
-  indicate_call: 'I have a problem'
+  port_registry: 'Rio das Filtsao',
+  call_sign: 'I have a problem'
 }],
 
 });

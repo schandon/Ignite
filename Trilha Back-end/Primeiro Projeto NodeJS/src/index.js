@@ -92,4 +92,44 @@ app.post("/withdraw",verifyExistsAccount, (request, response)=>{
   return response.status(201).send();
 });
 
+app.post("/statement/date", verifyExistsAccount, (request, response)=>{
+  const { customer } = request;
+  const { date } = request.query;
+
+  const dateFormat = new Date(date + " 00:00");
+
+  const statement = customer.statement.filter((statement) => {statement.createdAt.toDateString() === new Date(dateFormat).toDateString()});
+
+  return response.status(statement)
+})
+
+app.put("/account:id",verifyExistsAccount, (request, response)=>{
+  const { name } = request.body;
+  const { customer } = request
+
+  customer.name = name;
+
+  return response.status(201).send(customer);
+
+})
+
+app.delete("/account:id",verifyExistsAccount, (request,response)=>{
+  const customer = request;
+  
+  customers.splice(customer, 1);
+
+  return response.status(201).send(customers);
+
+})
+
+app.get("/balance",verifyExistsAccount, (request, response)=>{
+  const { customer } = request;
+
+  const amount= getBalance(customer.statement);
+
+  return response.json(amount);
+
+
+})
+
 app.listen(3009);
