@@ -16,11 +16,14 @@ model service_report {
   data_service     DateTime
   category_service String
   created_at       DateTime @default(now())
+  fk_os            String
 
+  service_order                    service_order                      @relation(fields: [fk_os], references: [os])
   service_report_collaborator_role service_report_collaborator_role[]
   service_report_equipaments       service_report_equipaments[]
   test_equipaments                 test_equipaments[]
   usage_equipaments                usage_equipaments[]
+  time_sheet                       time_sheet[]
 }
 
 model service_order {
@@ -29,15 +32,23 @@ model service_order {
   finished          Boolean
   date_os           DateTime
   created_at        DateTime @default(now())
+  fk_ship_mmsi      String
+  fk_ship_imo       String
+
+  ship           ship             @relation(fields: [fk_ship_imo, fk_ship_mmsi], references: [imo, mmsi])
+  service_report service_report[]
+  port           port?            @relation(fields: [fk_port], references: [id])
+  fk_port        String?
 }
 
 model port {
-  id        String @id @default(uuid())
-  name      String
-  latitude  String
-  longitude String
-  cidade    String
-  uf        String
+  id            String          @id @default(uuid())
+  name          String
+  latitude      String
+  longitude     String
+  cidade        String
+  uf            String
+  service_order service_order[]
 }
 
 model ship {
@@ -45,8 +56,9 @@ model ship {
   imo           String
   name_vessel   String
   owner         String
-  port_registry String
+  flag_registry String
   call_sign     String?
+  service_order service_order[]
 
   @@id([mmsi, imo])
 }
@@ -68,23 +80,23 @@ model collaborators {
 }
 
 model role {
-  id          String @id @default(uuid())
+  id          String                             @id @default(uuid())
   description String
-
-  service_report_collaborator_role service_report_collaborator_role[]
+  srcr        service_report_collaborator_role[]
 }
 
 model time_sheet {
-  id          String   @default(uuid())
-  date        DateTime
-  men         Int
-  date_start  DateTime @default(now())
-  leave_shop  DateTime @default(now())
-  arrive_job  DateTime
-  leave_job   DateTime
-  arrive_shop DateTime
+  id                String         @default(uuid())
+  date_service      DateTime       @default(now())
+  men               Int
+  leave_shop        String
+  arrive_job        String
+  leave_job         String
+  arrive_shop       String
+  fk_service_report String
+  service_report    service_report @relation(fields: [fk_service_report], references: [id])
 
-  @@id([id, date])
+  @@id([id, date_service])
 }
 
 model usage_equipaments {
@@ -111,14 +123,15 @@ model test_equipaments {
 }
 
 model service_report_collaborator_role {
-  id                String         @id @default(uuid())
-  service_report    service_report @relation(fields: [fk_service_report], references: [id])
-  collaborators     collaborators  @relation(fields: [fk_collaborators], references: [matricula])
-  role              role           @relation(fields: [fk_role], references: [id])
-  fk_service_report String
-  fk_collaborators  String
-  fk_role           String
-  created_at        DateTime       @default(now())
+  id                String   @id @default(uuid())
+  fk_service_report String?
+  fk_collaborators  String?
+  fk_role           String?
+  created_at        DateTime @default(now())
+
+  service_report service_report? @relation(fields: [fk_service_report], references: [id])
+  collaborators  collaborators?  @relation(fields: [fk_collaborators], references: [matricula])
+  role           role?           @relation(fields: [fk_role], references: [id])
 }
 
 model service_report_equipaments {

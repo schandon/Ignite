@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: relatorio_servico_api
     volumes:
-      - ./postgres/data:/var/lib/postgresql/data
+      - .devops/postgres/data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin

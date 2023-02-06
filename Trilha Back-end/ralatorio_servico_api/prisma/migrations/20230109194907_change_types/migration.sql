@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "time_sheet" ALTER COLUMN "arrive_job" SET DATA TYPE TEXT,
+ALTER COLUMN "arrive_shop" SET DATA TYPE TEXT,
+ALTER COLUMN "leave_job" SET DATA TYPE TEXT,
+ALTER COLUMN "leave_shop" SET DATA TYPE TEXT;
