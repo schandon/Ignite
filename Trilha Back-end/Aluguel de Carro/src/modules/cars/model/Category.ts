@@ -1,6 +1,6 @@
 import { v4 as uuidV4 } from "uuid"
 
-class Collaborator{
+class Category{
   name: string;
   matricula: string;
   createdAt: Date;
@@ -13,4 +13,4 @@ class Collaborator{
   }
 }
 
-export { Collaborator }
+export { Category }
