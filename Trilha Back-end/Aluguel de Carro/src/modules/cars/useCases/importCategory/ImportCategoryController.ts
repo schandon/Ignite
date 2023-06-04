@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
+import { ImportCategoryUseCase } from "./ImportCategoryUseCas";
 
 class ImportCategoryController{
   constructor(private importCategoryUsaCase: ImportCategoryUseCase){}
