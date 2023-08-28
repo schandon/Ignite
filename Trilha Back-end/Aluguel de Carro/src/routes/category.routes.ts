@@ -10,7 +10,6 @@ const uplaods = Multer({dest: './tmp'});
 
 
 categoryRoutes.post("/", (request, response) => {
-  console.log("Reload Fuincionando");
   return createCategoryController.handle(request, response);
 })
 categoryRoutes.get("/", (request, response) => {
