@@ -1,10 +1,31 @@
 version: "3.7"
 
 services: 
+  database:
+    image: postgres
+    container_name: database_ignite
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=schandon
+      - POSTGRES_PASSWORD=1q2w3e4r
+      - POSTGRES_DB=rentx
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - pgdata:/data/postgres
   app:
     build: .
     container_name: rentx
     ports:
       - 3003:3003
+      - 9229:9229
     volumes:
       - .:/usr/app
+    links: 
+      - database
+    depends_on:
+      - database
+volumes:
+  pgdata:
+    driver: local
