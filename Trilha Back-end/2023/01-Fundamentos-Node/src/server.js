@@ -17,9 +17,9 @@ const server = http.createServer((request, response)=>{
       email: 'johndoe@example.com'
     })
 
-    return response.end('Created successfully')
+    return response.writeHead(201).end()
  }
-  return response.end('Hello Ignite');
+  return response.writeHead(404).end('Not Found');
 
 })
 
